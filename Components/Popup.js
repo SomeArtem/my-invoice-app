@@ -44,7 +44,7 @@ class Popup{
         this.#closeCallback();
       }
       div.setAttribute('data-id','popup');
-      div.setAttribute('class','popup');
+      div.classList.add('popup');
       ElemToInsert.appendChild(div);
     }
   }
