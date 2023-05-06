@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && surge ./dist http://mindlessinvoice-hall.surge.sh/",
     "preview": "vite preview"
   },
   "devDependencies": {
