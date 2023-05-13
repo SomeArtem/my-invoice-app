@@ -2,23 +2,49 @@ import './style.css';
 import viteLogo from '/vite.svg';
 import DOM from './utils/keys';
 import Popup from './Components/Popup';
+import TableItem from './Components/TableItem';
+import State from './Utilites/data';
 
 
-const createBtn=document.getElementById('create-button');
+const createBtn=document.querySelector(`[data-id='${DOM.others.CREATE_BUTTON}'`);
+const table=document.querySelector(`[data-id='${DOM.others.TABLE}'`);
 const app=document.querySelector(`[data-id='${DOM.others.APP}']`);
 
-createBtn.addEventListener('click',()=>{
-  createPopup('Create');  
+const state=new State('TableItems');
+let localdata=state.getData();//массив
+
+
+renderData(localdata);
+
+[createBtn].forEach(Btn => {
+  Btn.addEventListener('click',(e)=>{
+    console.dir(e.target)  
+    createPopup(e.target.dataset.info);
+  });  
 });
 
 function createPopup(callerName){
-  let myPopup=new Popup(callerName,closePopupCallback);
+  let myPopup=new Popup(callerName,closePopupCallback, confirmPopupCallback);
   myPopup.render(app);
-  // myPopup.style.display='flex';
 }
+
 function closePopupCallback(){
   app.lastChild.remove();
 }
 
+function confirmPopupCallback(item){
+  state.addItem(item);
+  let puk=state.getData();
+  renderData(puk);
+  closePopupCallback();
+}
+
+function renderData(dataToRender){
+  table.innerHTML='';
+  dataToRender.forEach(element => {
+    const tableItem=new TableItem(element);
+    tableItem.render(table);    
+  });
+}
 
 

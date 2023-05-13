@@ -11,6 +11,7 @@ const DOM={
 
         controls:{        
             CONFIRM_BUTTON:'confirm-button',
+            CLOSE_BUTTON:'close-button',
         },
         outputs:{
             TOTAL_Display:'total-display',
@@ -18,7 +19,10 @@ const DOM={
     },
     others:{
         CREATE_BUTTON:'create-button',
-        APP:'app'
+        UPDATE_BUTTON:'update-button',
+        DELETE_BUTTON:'delete-button',
+        APP:'app',
+        TABLE:"table",
     }
 }
 
