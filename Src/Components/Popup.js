@@ -1,4 +1,4 @@
-import DOM from "../utils/keys";
+import DOM from "../Utilites/keys";
 class Popup{
     #callName;
     #closeCallback;

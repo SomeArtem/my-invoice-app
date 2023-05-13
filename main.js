@@ -1,9 +1,9 @@
 import './style.css';
 import viteLogo from '/vite.svg';
-import DOM from './utils/keys';
-import Popup from './Components/Popup';
-import TableItem from './Components/TableItem';
-import State from './Utilites/data';
+import DOM from './Src/Utilites/keys';
+import Popup from './Src/Components/Popup';
+import TableItem from './Src/Components/TableItem';
+import State from './Src/Utilites/data';
 
 
 const createBtn=document.querySelector(`[data-id='${DOM.others.CREATE_BUTTON}'`);
