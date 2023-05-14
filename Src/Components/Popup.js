@@ -28,7 +28,7 @@ class Popup{
         </div>
         <div>
           <span>Cost: $</span>
-          <input data-id="${DOM.popup.inputs.COST_INPUT}" type="text" name="" id="">
+          <input data-id="${DOM.popup.inputs.COST_INPUT}" type="text" name="" id="" value="${this.#item.cost?this.#item.cost:''}">
         </div>
         <div>Total: <span data-id="total-display">12$</span></div>
         <button data-id="confirm-button">${this.#callName + this.#item.itemId}</button>
@@ -36,11 +36,11 @@ class Popup{
       <div>
         <div style="display: flex; flex-direction: column;">
           Work item:
-          <input data-id="${DOM.popup.inputs.TITLE_INPUT}" type="text" name="" id="" placeholder="Enter title of the work item">
+          <input data-id="${DOM.popup.inputs.TITLE_INPUT}" type="text" name="" id="" placeholder="Enter title of the work item" value="${this.#item.title?this.#item.title:''}">
         </div>
         <div style="display: flex; flex-direction: column;">
           Description:
-          <textarea data-id="${DOM.popup.inputs.DESCRIPTION_INPUT}" name="" id="" cols="30" rows="10" placeholder="Write what this work item about"></textarea>
+          <textarea data-id="${DOM.popup.inputs.DESCRIPTION_INPUT}" name="" id="" cols="30" rows="10" placeholder="Write what this work item about"> ${this.#item.description?this.#item.description:''}</textarea>
         </div>
       </div>
       `;
