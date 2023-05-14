@@ -17,7 +17,7 @@ renderData(localdata);
 [createBtn].forEach(Btn => {
   Btn.addEventListener('click',(e)=>{
     console.dir(e.target)  
-    renderPopup(e.target.dataset.info,{});
+    renderPopup(e.target.dataset.info,{}); 
   });  
 });
 
