@@ -12,19 +12,17 @@ const app=document.querySelector(`[data-id='${DOM.others.APP}']`);
 
 const state=new State('TableItems');
 let localdata=state.getData();//массив
-
-
 renderData(localdata);
 
 [createBtn].forEach(Btn => {
   Btn.addEventListener('click',(e)=>{
     console.dir(e.target)  
-    createPopup(e.target.dataset.info);
+    renderPopup(e.target.dataset.info,{});
   });  
 });
 
-function createPopup(callerName){
-  let myPopup=new Popup(callerName,closePopupCallback, confirmPopupCallback);
+function renderPopup(callerName, itemToChange){
+  let myPopup=new Popup(callerName,closePopupCallback, confirmPopupCallback, itemToChange);
   myPopup.render(app);
 }
 
@@ -39,10 +37,17 @@ function confirmPopupCallback(item){
   closePopupCallback();
 }
 
+function itemCallback(id) {
+  //console.log(id);
+  let itemFromState=state.findItem(id);
+  console.dir(itemFromState);
+  renderPopup('Изменить', itemFromState);
+}
+
 function renderData(dataToRender){
   table.innerHTML='';
   dataToRender.forEach(element => {
-    const tableItem=new TableItem(element);
+    const tableItem=new TableItem(element, itemCallback);
     tableItem.render(table);    
   });
 }

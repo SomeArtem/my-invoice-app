@@ -3,10 +3,12 @@ class Popup{
     #callName;
     #closeCallback;
     #confirmCallback;
-    constructor(callName,closeCallback, confirmCallback){
+    #item
+    constructor(callName,closeCallback, confirmCallback,item){//(callName,closeCallback, confirmCallback)
       this.#callName=callName;
       this.#closeCallback=closeCallback;    
       this.#confirmCallback=confirmCallback;    
+      this.#item=item;    
     }
     render(ElemToInsert){      
       let div=document.createElement('div');      
@@ -20,14 +22,14 @@ class Popup{
         <input data-id="invoice-num-input" type="text" name="">
         <div>
           <span>Qty:</span>
-          <input data-id="${DOM.popup.inputs.QUANTITY_INPUT}" type="text" name="" id="">
+          <input data-id="${DOM.popup.inputs.QUANTITY_INPUT}" type="text" name="" id="" value="${this.#item.quantity?this.#item.quantity:''}">
         </div>
         <div>
           <span>Cost: $</span>
           <input data-id="${DOM.popup.inputs.COST_INPUT}" type="text" name="" id="">
         </div>
         <div>Total: <span data-id="total-display">12$</span></div>
-        <button data-id="confirm-button">${this.#callName}</button>
+        <button data-id="confirm-button">${this.#callName + this.#item.itemId}</button>
       </div>
       <div>
         <div style="display: flex; flex-direction: column;">
@@ -59,6 +61,7 @@ class Popup{
           quantity:  quantityInput.value,
           cost: costInput.value,
           total: 'total',
+          itemId: Date.now(),
         }
         this.#confirmCallback(confItem);
       }

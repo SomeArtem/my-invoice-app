@@ -47,6 +47,10 @@ body{
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  cursor: pointer;
+}
+.table__item:hover{
+  background-color: blueviolet;
 }
 
 @media (prefers-color-scheme: light) {
