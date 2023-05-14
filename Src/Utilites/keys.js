@@ -12,6 +12,7 @@ const DOM={
         controls:{        
             CONFIRM_BUTTON:'confirm-button',
             CLOSE_BUTTON:'close-button',
+            DELETE_BUTTON:"delete-button"
         },
         outputs:{
             TOTAL_Display:'total-display',

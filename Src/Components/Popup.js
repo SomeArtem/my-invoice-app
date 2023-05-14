@@ -3,18 +3,20 @@ class Popup{
     #callName;
     #closeCallback;
     #confirmCallback;
+    #deleteCallback;
     #item
-    constructor(callName,closeCallback, confirmCallback,item){//(callName,closeCallback, confirmCallback)
+    constructor(callName,closeCallback, confirmCallback, deleteCallback,item){//(callName,closeCallback, confirmCallback)
       this.#callName=callName;
       this.#closeCallback=closeCallback;    
       this.#confirmCallback=confirmCallback;    
+      this.#deleteCallback=deleteCallback;    
       this.#item=item;    
     }
     render(ElemToInsert){      
       let div=document.createElement('div');      
       const template=`    
       <div class="popup_controls">
-        <button>Delete</button>
+        <button data-id="${DOM.popup.controls.DELETE_BUTTON}">Delete</button>
         <button data-id="${DOM.popup.controls.CLOSE_BUTTON}">close</button>
       </div>
       <div class="popup_inputs">
@@ -46,6 +48,7 @@ class Popup{
       div.innerHTML=template;
       const confirmBtn = div.querySelector('[data-id="confirm-button"]');
       const closeBtn = div.querySelector(`[data-id="${DOM.popup.controls.CLOSE_BUTTON}"]`);
+      const deleteBtn = div.querySelector(`[data-id="${DOM.popup.controls.DELETE_BUTTON}"]`);
       const titleInput = div.querySelector(`[data-id="${DOM.popup.inputs.TITLE_INPUT}"]`);
       const descriptionInput = div.querySelector(`[data-id="${DOM.popup.inputs.DESCRIPTION_INPUT}"]`);
       const costInput = div.querySelector(`[data-id="${DOM.popup.inputs.COST_INPUT}"]`);
@@ -53,6 +56,9 @@ class Popup{
       
       closeBtn.onclick=()=>{
         this.#closeCallback();
+      }
+      deleteBtn.onclick=()=>{
+        this.#deleteCallback(this.#item.itemId);
       }
       confirmBtn.onclick=()=>{
         const confItem={

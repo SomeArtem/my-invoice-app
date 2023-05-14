@@ -11,17 +11,24 @@ class State{
     }
     addItem(item){
         this.#DataArray.push(item);
-        let ddddattta=JSON.stringify(this.#DataArray)
+        let ddddattta=JSON.stringify(this.#DataArray);
         localStorage.setItem(this.#LocalStorageKey,ddddattta);
     }
-    findItem(id){
+    findItemById(id){
         return this.#DataArray.find(item=>item.itemId==id)
     }
     UpdateData(id){
         console.log();
     }
-    DeleteData(id){
-        console.log();
+    deleteItemById(id){
+        //console.log(`сработало удаление по id ${id} из store`);
+        //let itemToDelete=this.findItemById(id);
+        //console.log(itemToDelete);
+
+
+        this.#DataArray=this.#DataArray.filter(item=>item.itemId!=id);
+        let ddddattta=JSON.stringify(this.#DataArray);
+        localStorage.setItem(this.#LocalStorageKey,ddddattta);
     }
 }
 

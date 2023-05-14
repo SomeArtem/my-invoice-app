@@ -22,7 +22,7 @@ renderData(localdata);
 });
 
 function renderPopup(callerName, itemToChange){
-  let myPopup=new Popup(callerName,closePopupCallback, confirmPopupCallback, itemToChange);
+  let myPopup=new Popup(callerName,closePopupCallback, confirmPopupCallback, deletePopupCallback, itemToChange);
   myPopup.render(app);
 }
 
@@ -37,9 +37,16 @@ function confirmPopupCallback(item){
   closePopupCallback();
 }
 
+function deletePopupCallback(id) {
+  state.deleteItemById(id);
+  let puk=state.getData();
+  renderData(puk);
+  closePopupCallback();
+}
+
 function itemCallback(id) {
   //console.log(id);
-  let itemFromState=state.findItem(id);
+  let itemFromState=state.findItemById(id);
   console.dir(itemFromState);
   renderPopup('Изменить', itemFromState);
 }
