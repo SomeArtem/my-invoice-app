@@ -15,7 +15,7 @@ const DOM={
             DELETE_BUTTON:"delete-button"
         },
         outputs:{
-            TOTAL_Display:'total-display',
+            TOTAL_DISPLAY:'total-display',
         }
     },
     others:{

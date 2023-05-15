@@ -5,6 +5,9 @@ class Popup{
     #confirmCallback;
     #deleteCallback;
     #item
+    #privatetotal
+    #privatecost=0
+    #privateqty=0
     constructor(callName,closeCallback, confirmCallback, deleteCallback,item){//(callName,closeCallback, confirmCallback)
       this.#callName=callName;
       this.#closeCallback=closeCallback;    
@@ -31,7 +34,7 @@ class Popup{
           <input data-id="${DOM.popup.inputs.COST_INPUT}" type="text" name="" id="" value="${this.#item.cost?this.#item.cost:''}">
         </div>
         <div>Total: <span data-id="total-display">12$</span></div>
-        <button data-id="confirm-button">${this.#callName + this.#item.itemId}</button>
+        <button data-id="confirm-button">${this.#callName} ${this.#item.itemId ? this.#item.itemId : ''}</button>
       </div>
       <div>
         <div style="display: flex; flex-direction: column;">
@@ -50,9 +53,21 @@ class Popup{
       const closeBtn = div.querySelector(`[data-id="${DOM.popup.controls.CLOSE_BUTTON}"]`);
       const deleteBtn = div.querySelector(`[data-id="${DOM.popup.controls.DELETE_BUTTON}"]`);
       const titleInput = div.querySelector(`[data-id="${DOM.popup.inputs.TITLE_INPUT}"]`);
+
       const descriptionInput = div.querySelector(`[data-id="${DOM.popup.inputs.DESCRIPTION_INPUT}"]`);
       const costInput = div.querySelector(`[data-id="${DOM.popup.inputs.COST_INPUT}"]`);
       const quantityInput = div.querySelector(`[data-id="${DOM.popup.inputs.QUANTITY_INPUT}"]`);
+      
+
+
+      costInput.onkeyup=(e)=>{
+        this.#privatecost=e.target.value;
+        this.inphandler(e);              
+      }
+      quantityInput.onkeyup=(e)=>{
+        this.#privateqty=e.target.value;
+        this.inphandler(e);
+      }
       
       closeBtn.onclick=()=>{
         this.#closeCallback();
@@ -66,7 +81,7 @@ class Popup{
           description: descriptionInput.value,
           quantity:  quantityInput.value,
           cost: costInput.value,
-          total: 'total',
+          total: this.#privatetotal,
           itemId: Date.now(),
         }
         this.#confirmCallback(confItem);
@@ -74,6 +89,22 @@ class Popup{
       div.setAttribute('data-id','popup');
       div.classList.add('popup');
       ElemToInsert.appendChild(div);
+    }
+
+    inphandler(event){
+
+      this.#privatetotal=this.#privateqty*this.#privatecost;
+
+      let inps=event.target.parentNode.parentNode;
+      let disp=inps.querySelector(`[data-id="${DOM.popup.outputs.TOTAL_DISPLAY}"]`)
+      disp.innerText=this.#privatetotal;
+
+
+      // let newValue=event.target.value;
+      // let inps=event.target.parentNode.parentNode;
+      // let disp=inps.querySelector(`[data-id="${DOM.popup.outputs.TOTAL_DISPLAY}"]`)
+      // disp.innerText=newValue;
+
     }
   }
 
