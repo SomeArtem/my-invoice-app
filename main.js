@@ -4,11 +4,21 @@ import DOM from './Src/Utilites/keys';
 import Popup from './Src/Components/Popup';
 import TableItem from './Src/Components/TableItem';
 import State from './Src/Utilites/data';
+import TotalCalculator from './Src/Components/TotalCalculator';
 
 
 const createBtn=document.querySelector(`[data-id='${DOM.others.CREATE_BUTTON}'`);
 const table=document.querySelector(`[data-id='${DOM.others.TABLE}'`);
 const app=document.querySelector(`[data-id='${DOM.others.APP}']`);
+
+
+
+
+let calculator=new TotalCalculator(discountChangedCall);
+calculator.render(app);
+
+
+
 
 const state=new State('TableItems');
 let localdata=state.getData();//массив
@@ -35,6 +45,8 @@ function confirmPopupCallback(item){
   let puk=state.getData();
   renderData(puk);
   closePopupCallback();
+
+  calculator.refreshTotals();
 }
 
 function deletePopupCallback(id) {
@@ -59,4 +71,7 @@ function renderData(dataToRender){
   });
 }
 
+function discountChangedCall() {
+    
+}
 

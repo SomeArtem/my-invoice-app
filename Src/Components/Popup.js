@@ -23,7 +23,7 @@ class Popup{
         <button data-id="${DOM.popup.controls.CLOSE_BUTTON}">close</button>
       </div>
       <div class="popup_inputs">
-        <h1>Add</h1>
+        <h1>${this.#callName}</h1>
         <input data-id="invoice-num-input" type="text" name="">
         <div>
           <span>Qty:</span>

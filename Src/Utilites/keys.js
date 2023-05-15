@@ -24,6 +24,10 @@ const DOM={
         DELETE_BUTTON:'delete-button',
         APP:'app',
         TABLE:"table",
+        TOTAL_CALCULATIONS:"total-calcucations",
+        SUBTOTAL:"subtotal",
+        DISCOUNT:"discount",
+        TOTALMAXIMA:"totalmaxima",
     }
 }
 

@@ -9,8 +9,13 @@ body{
   color: white;
 }
 
+.app{
+  width: 1500px;
+  margin: 0 auto;
+}
+
 .popup{
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   display: flex;
   flex-direction: column;

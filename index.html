@@ -7,18 +7,33 @@
     <title>Invoice App</title>
   </head>
   <body>
-    <div data-id="app">
+    <div data-id="app" class="app">
       <p data-id="create-button" data-info="создать" class="crud__button">(create)</p>
+
+
+
+      <div class="table__item" style="background-color: rgb(45, 85, 85);">
+        <div>title:</div>
+        <div>description:</div>
+        <div>quantity:</div>
+        <div>cost:</div>
+        <div>total:</div>
+      </div>
+      <div data-id="table">
+      </div>
+      <!-- <div data-id="total-calcucations" class="total__calcucations" style="background-color: crimson;">
+        <div>Предрасчёт: <span data-id="subtotal"></span> </div>
+        <div>Скидка: <input type="text" name="discount" data-id="discount"> </div>
+        <div>Финально: <span data-id="totalmaxima"></span> </div>
+      </div> -->
+
+
+
+
+
     </div>
-    <div class="table__item" style="background-color: rgb(45, 85, 85);">
-      <div>title:</div>
-      <div>description:</div>
-      <div>quantity:</div>
-      <div>cost:</div>
-      <div>total:</div>
-    </div>
-    <div data-id="table">
-    </div>
+
+    <!-- было тут -->
     <script type="module" src="/main.js"></script>
   </body>
 </html>
