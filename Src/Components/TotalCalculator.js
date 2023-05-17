@@ -6,6 +6,7 @@ export default class TotalCalculator{
     #discount=0;
     #state=new State('TableItems');
     #discountCall
+    
 
     constructor(discountCall){
         this.#discountCall=discountCall;
