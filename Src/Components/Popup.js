@@ -33,7 +33,7 @@ class Popup{
           <span>Cost: $</span>
           <input data-id="${DOM.popup.inputs.COST_INPUT}" type="text" name="" id="" value="${this.#item.cost?this.#item.cost:''}">
         </div>
-        <div>Total: <span data-id="total-display">12$</span></div>
+        <div>Total: <span data-id="total-display">${this.#item.total?this.#item.total:''}$</span></div>
         <button data-id="confirm-button">${this.#callName} ${this.#item.itemId ? this.#item.itemId : ''}</button>
       </div>
       <div>
@@ -61,11 +61,11 @@ class Popup{
 
 
       costInput.onkeyup=(e)=>{
-        this.#privatecost=e.target.value;
+        this.#privatecost=Number(e.target.value);
         this.inphandler(e);              
       }
       quantityInput.onkeyup=(e)=>{
-        this.#privateqty=e.target.value;
+        this.#privateqty=Number(e.target.value);
         this.inphandler(e);
       }
       
@@ -81,8 +81,9 @@ class Popup{
           description: descriptionInput.value,
           quantity:  quantityInput.value,
           cost: costInput.value,
-          total: this.#privatetotal,
-          itemId: Date.now(),
+          total: Number(costInput.value) * Number(quantityInput.value),
+          // itemId: Date.now(),
+          itemId: this.#item.itemId ? this.#item.itemId : Date.now(),
         }
         this.#confirmCallback(confItem);
       }
@@ -96,7 +97,7 @@ class Popup{
       this.#privatetotal=this.#privateqty*this.#privatecost;
 
       let inps=event.target.parentNode.parentNode;
-      let disp=inps.querySelector(`[data-id="${DOM.popup.outputs.TOTAL_DISPLAY}"]`)
+      let disp=inps.querySelector(`[data-id="${DOM.popup.outputs.TOTAL_DISPLAY}"]`);
       disp.innerText=this.#privatetotal;
 
 

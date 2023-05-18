@@ -15,10 +15,16 @@ class State{
         localStorage.setItem(this.#LocalStorageKey,ddddattta);
     }
     findItemById(id){
-        return this.#DataArray.find(item=>item.itemId==id)
+        return this.#DataArray.find(item=>item.itemId==id);
     }
-    UpdateData(id){
-        console.log();
+    editItem(item){
+        //console.log('editItem');
+        let el=this.findItemById(item.itemId);
+        let index=this.#DataArray.indexOf(el);
+        this.#DataArray[index]=item;
+        let ddddattta=JSON.stringify(this.#DataArray);
+        localStorage.setItem(this.#LocalStorageKey,ddddattta);
+        console.log('editItem');        
     }
     deleteItemById(id){
         //console.log(`сработало удаление по id ${id} из store`);

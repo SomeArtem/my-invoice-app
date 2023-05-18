@@ -51,11 +51,13 @@ export default class TotalCalculator{
     }
     refreshTotals(){
         const SubtotalOutput = document.querySelector(`[data-id="${DOM.others.SUBTOTAL}"]`);
+        const TotalOutput = document.querySelector(`[data-id="${DOM.others.TOTALMAXIMA}"]`);
 
         let items=this.#state.getData();
         let sum=0;
-        items.forEach(item => sum+=item.total)
+        items.forEach(item => sum+=item.total);
         
         SubtotalOutput.innerHTML=sum;
+        TotalOutput.innerHTML=sum*(1-this.#discount/100);
     }
 }
