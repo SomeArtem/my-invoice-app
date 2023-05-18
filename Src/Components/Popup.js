@@ -6,14 +6,16 @@ class Popup{
     #deleteCallback;
     #item
     #privatetotal
-    #privatecost=0
-    #privateqty=0
+    #privatecost
+    #privateqty
     constructor(callName,closeCallback, confirmCallback, deleteCallback,item){//(callName,closeCallback, confirmCallback)
       this.#callName=callName;
       this.#closeCallback=closeCallback;    
       this.#confirmCallback=confirmCallback;    
       this.#deleteCallback=deleteCallback;    
-      this.#item=item;    
+      this.#item=item;   
+      this.#privatecost=item.cost;
+      this.#privateqty=item.quantity;
     }
     render(ElemToInsert){      
       let div=document.createElement('div');      
