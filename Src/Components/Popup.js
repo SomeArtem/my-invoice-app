@@ -1,10 +1,12 @@
 import DOM from "../Utilites/keys";
+import validation from "../Utilites/validation";
+
 class Popup{
     #callName;
     #closeCallback;
     #confirmCallback;
     #deleteCallback;
-    #item
+    #item=null;//null!!!!!!
     #privatetotal
     #privatecost
     #privateqty
@@ -14,14 +16,14 @@ class Popup{
       this.#confirmCallback=confirmCallback;    
       this.#deleteCallback=deleteCallback;    
       this.#item=item;   
-      this.#privatecost=item.cost;
-      this.#privateqty=item.quantity;
+      this.#privatecost=item.cost?item.cost:0;
+      this.#privateqty=item.quantity?item.quantity:0;
     }
     render(ElemToInsert){      
       let div=document.createElement('div');      
       const template=`    
       <div class="popup_controls">
-        <button data-id="${DOM.popup.controls.DELETE_BUTTON}">Delete</button>
+        <button ${this.#item.itemId ? '' : 'disabled'} data-id="${DOM.popup.controls.DELETE_BUTTON}">Delete</button>
         <button data-id="${DOM.popup.controls.CLOSE_BUTTON}">close</button>
       </div>
       <div class="popup_inputs">
@@ -35,8 +37,8 @@ class Popup{
           <span>Cost: $</span>
           <input data-id="${DOM.popup.inputs.COST_INPUT}" type="text" name="" id="" value="${this.#item.cost?this.#item.cost:''}">
         </div>
-        <div>Total: <span data-id="total-display">${this.#item.total?this.#item.total:''}$</span></div>
-        <button data-id="confirm-button">${this.#callName} ${this.#item.itemId ? this.#item.itemId : ''}</button>
+        <div>Total: <span data-id="total-display">${this.#item.total?this.#item.total:'0'}$</span></div>
+        <button data-id="${DOM.popup.controls.CONFIRM_BUTTON}">${this.#callName} ${this.#item.itemId ? this.#item.itemId : ''}</button>
       </div>
       <div>
         <div style="display: flex; flex-direction: column;">
@@ -51,7 +53,7 @@ class Popup{
       `;
   
       div.innerHTML=template;
-      const confirmBtn = div.querySelector('[data-id="confirm-button"]');
+      const confirmBtn = div.querySelector(`[data-id="${DOM.popup.controls.CONFIRM_BUTTON}"]`);
       const closeBtn = div.querySelector(`[data-id="${DOM.popup.controls.CLOSE_BUTTON}"]`);
       const deleteBtn = div.querySelector(`[data-id="${DOM.popup.controls.DELETE_BUTTON}"]`);
       const titleInput = div.querySelector(`[data-id="${DOM.popup.inputs.TITLE_INPUT}"]`);
@@ -60,11 +62,21 @@ class Popup{
       const costInput = div.querySelector(`[data-id="${DOM.popup.inputs.COST_INPUT}"]`);
       const quantityInput = div.querySelector(`[data-id="${DOM.popup.inputs.QUANTITY_INPUT}"]`);
       
-
+      costInput.onkeydown=(e)=>{
+        if (e.key!=='Enter'&&e.key!=='Backspace'&&e.key!=='Tab'){
+          e.preventDefault();
+          this.#privatecost=String(this.#privatecost)+String(validation.isNumber(e.key));
+          console.log('costInput.onkeydown: ',e.key);
+        }
+      }
 
       costInput.onkeyup=(e)=>{
-        this.#privatecost=Number(e.target.value);
-        this.inphandler(e);              
+        if (e.key!=='Enter'&&e.key!=='Backspace'&&e.key!=='Tab'){
+          costInput.value=this.#privatecost;          
+        }else{
+          this.#privatecost=e.target.value;          
+        }
+        this.inphandler(e);  
       }
       quantityInput.onkeyup=(e)=>{
         this.#privateqty=Number(e.target.value);
@@ -100,7 +112,10 @@ class Popup{
 
       let inps=event.target.parentNode.parentNode;
       let disp=inps.querySelector(`[data-id="${DOM.popup.outputs.TOTAL_DISPLAY}"]`);
-      disp.innerText=this.#privatetotal;
+      disp.innerText=this.#privatetotal+'$';
+
+      const confirmBtn = inps.querySelector('[data-id="confirm-button"]');
+      this.#privatetotal>0 ? null : confirmBtn.setAttribute('disablded','disablded');
 
 
       // let newValue=event.target.value;
