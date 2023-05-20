@@ -10,8 +10,10 @@ body{
 }
 
 .app{
-  width: 1500px;
+  /* width: 1500px; */
+  max-width: 80%;
   margin: 0 auto;
+  padding: 2rem;
 }
 
 .popup{
