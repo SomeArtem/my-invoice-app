@@ -1,46 +1,57 @@
-import State from "../Utilites/data";
+import State2 from "../Utilites/data";//!!!!!!!!!!!!!!!!!
 import DOM from "../Utilites/keys";
 
-export default class TotalCalculator{
+export default class TotalCalculator {
     #subtotal
-    #discount=0;
-    #state=new State('TableItems');
+    #discount = 0;
+    #state = new State2('TableItems');
     #discountCall
-    
 
-    constructor(discountCall){
-        this.#discountCall=discountCall;
+
+    constructor(discountCall) {
+        this.#discountCall = discountCall;
     }
 
-    
 
-    render(ElemToInsert){
 
-        const itemMarkup=`
+    render(ElemToInsert) {
+
+        const itemMarkup = `
         <div data-id="${DOM.others.TOTAL_CALCULATIONS}" class="total__calcucations" style="background-color: crimson;">
             <div>Предрасчёт: <span data-id="${DOM.others.SUBTOTAL}"></span> </div>
             <div>Скидка: <input type="text" name="${DOM.others.DISCOUNT}" data-id="${DOM.others.DISCOUNT}"> </div>
             <div>Финально: <span data-id="${DOM.others.TOTALMAXIMA}"></span> </div>
         </div>
         `;
-        const totalCalcElem=document.createElement('div');
-        totalCalcElem.innerHTML=itemMarkup;
+        const totalCalcElem = document.createElement('div');
+        totalCalcElem.innerHTML = itemMarkup;
 
         const SubtotalOutput = totalCalcElem.querySelector(`[data-id="${DOM.others.SUBTOTAL}"]`);
         const DiscountInput = totalCalcElem.querySelector(`[data-id="${DOM.others.DISCOUNT}"]`);
         const TotalOutput = totalCalcElem.querySelector(`[data-id="${DOM.others.TOTALMAXIMA}"]`);
 
-        let items=this.#state.getData();
-        let sum=0;
-        items.forEach(item => sum+=item.total)
-        SubtotalOutput.innerHTML=sum;
-        TotalOutput.innerHTML=sum*(1-this.#discount/100);
 
-        DiscountInput.onkeyup=(e)=>{
+        this.#discount = this.#state.getDiscount();
+        let localDiscount = this.#discount;
+        let items = this.#state.getData() ? this.#state.getData() : [];//!!!!!!!!!!!!!
+        let sum = 0;
+        if (items.length > 0) {
+            items.forEach(item => sum += item.total)
+            SubtotalOutput.innerHTML = sum;
+            TotalOutput.innerHTML = sum * (1 - this.#state.getDiscount() / 100); //sum * (1 - this.#discount / 100);
+        }
+
+        DiscountInput.value = this.#state.getDiscount();
+
+
+        DiscountInput.onkeyup = (e) => {
             // discontchanged();//func?
-            this.#discount=e.target.value;
+            this.#discount = e.target.value;
             console.log(e.target.value);
-            TotalOutput.innerHTML=sum*(1-this.#discount/100);
+
+            this.#state.setDiscount(e.target.value);
+
+            TotalOutput.innerHTML = sum * (1 - this.#discount / 100);
         }
 
 
@@ -49,15 +60,15 @@ export default class TotalCalculator{
 
         ElemToInsert.appendChild(totalCalcElem);
     }
-    refreshTotals(){
+    refreshTotals() {
         const SubtotalOutput = document.querySelector(`[data-id="${DOM.others.SUBTOTAL}"]`);
         const TotalOutput = document.querySelector(`[data-id="${DOM.others.TOTALMAXIMA}"]`);
 
-        let items=this.#state.getData();
-        let sum=0;
-        items.forEach(item => sum+=item.total);
-        
-        SubtotalOutput.innerHTML=sum;
-        TotalOutput.innerHTML=sum*(1-this.#discount/100);
+        let items = this.#state.getData();
+        let sum = 0;
+        items.forEach(item => sum += item.total);
+
+        SubtotalOutput.innerHTML = sum;
+        TotalOutput.innerHTML = sum * (1 - this.#discount / 100);
     }
 }
