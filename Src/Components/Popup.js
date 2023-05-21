@@ -38,7 +38,7 @@ class Popup {
           <input data-id="${DOM.popup.inputs.COST_INPUT}" type="text" name="" id="" value="${this.#item.cost ? this.#item.cost : ''}">
         </div>
         <div>Total: <span data-id="total-display">${this.#item.total ? this.#item.total : '0'}$</span></div>
-        <button data-id="${DOM.popup.controls.CONFIRM_BUTTON}">${this.#callName} ${this.#item.itemId ? this.#item.itemId : ''}</button>
+        <button data-id="${DOM.popup.controls.CONFIRM_BUTTON}" disabled>${this.#callName} ${this.#item.itemId ? this.#item.itemId : ''}</button>
       </div>
       <div>
         <div style="display: flex; flex-direction: column;">
@@ -53,77 +53,72 @@ class Popup {
       `;
 
     div.innerHTML = template;
+    //получаем все контролсы
     const confirmBtn = div.querySelector(`[data-id="${DOM.popup.controls.CONFIRM_BUTTON}"]`);
     const closeBtn = div.querySelector(`[data-id="${DOM.popup.controls.CLOSE_BUTTON}"]`);
     const deleteBtn = div.querySelector(`[data-id="${DOM.popup.controls.DELETE_BUTTON}"]`);
     const titleInput = div.querySelector(`[data-id="${DOM.popup.inputs.TITLE_INPUT}"]`);
-
     const descriptionInput = div.querySelector(`[data-id="${DOM.popup.inputs.DESCRIPTION_INPUT}"]`);
     const costInput = div.querySelector(`[data-id="${DOM.popup.inputs.COST_INPUT}"]`);
     const quantityInput = div.querySelector(`[data-id="${DOM.popup.inputs.QUANTITY_INPUT}"]`);
 
-    costInput.onkeydown = (e) => {
-      if (e.key !== 'Enter' && e.key !== 'Backspace' && e.key !== 'Tab') {
-        e.preventDefault();
-        this.#privatecost = String(this.#privatecost) + String(validation.isNumber(e.key));
-        console.log('costInput.onkeydown: ', e.key);
-      }
-    }
+    //вешаем все слушатели
+    quantityInput.oninput = e => this.inphandler(e);
+    costInput.oninput = e => this.inphandler(e);
+    closeBtn.onclick = () => this.#closeCallback();
+    deleteBtn.onclick = () => this.#deleteCallback(this.#item.itemId);
+    titleInput.oninput=()=> this.readytosubmit();
 
-    costInput.onkeyup = (e) => {
-      if (e.key !== 'Enter' && e.key !== 'Backspace' && e.key !== 'Tab') {
-        costInput.value = this.#privatecost;
-      } else {
-        this.#privatecost = e.target.value;
-      }
-      this.inphandler(e);
-    }
-    quantityInput.onkeyup = (e) => {
-      this.#privateqty = Number(e.target.value);
-      this.inphandler(e);
-    }
-
-    closeBtn.onclick = () => {
-      this.#closeCallback();
-    }
-    deleteBtn.onclick = () => {
-      this.#deleteCallback(this.#item.itemId);
-    }
     confirmBtn.onclick = () => {
       const confItem = {
         title: titleInput.value,
         description: descriptionInput.value,
-        quantity: quantityInput.value,
-        cost: costInput.value,
-        total: Number(costInput.value) * Number(quantityInput.value),
-        // itemId: Date.now(),
+        quantity: this.#privateqty,
+        cost: this.#privatecost,
+        total: this.#privatetotal,        
         itemId: this.#item.itemId ? this.#item.itemId : Date.now(),
       }
       this.#confirmCallback(confItem);
     }
+    //вставляем попап в дом
     div.setAttribute('data-id', 'popup');
     div.classList.add('popup');
     ElemToInsert.appendChild(div);
   }
 
   inphandler(event) {
+    let validNum=validation.isNum(event.target.value);
+    let validValue=validation.isLength(validNum,8);
+    event.target.value=validValue;      
+    event.target.dataset.id==='quantity-input'?this.#privateqty=validValue:this.#privatecost=validValue;
 
     this.#privatetotal = this.#privateqty * this.#privatecost;
-
     let inps = event.target.parentNode.parentNode;
     let disp = inps.querySelector(`[data-id="${DOM.popup.outputs.TOTAL_DISPLAY}"]`);
     disp.innerText = this.#privatetotal + '$';
-
     const confirmBtn = inps.querySelector('[data-id="confirm-button"]');
     this.#privatetotal > 0 ? null : confirmBtn.setAttribute('disablded', 'disablded');
+    this.readytosubmit();
+  }
 
+  readytosubmit(){
+    //переключатель кнопки confirm
+    const confirmBtn = document.querySelector(`[data-id="${DOM.popup.controls.CONFIRM_BUTTON}"]`);    
+    const titleInput = document.querySelector(`[data-id="${DOM.popup.inputs.TITLE_INPUT}"]`);
 
-    // let newValue=event.target.value;
-    // let inps=event.target.parentNode.parentNode;
-    // let disp=inps.querySelector(`[data-id="${DOM.popup.outputs.TOTAL_DISPLAY}"]`)
-    // disp.innerText=newValue;
-
+    const confItem = {
+      title: titleInput.value,
+      quantity: this.#privateqty,
+      cost: this.#privatecost,
+      total: this.#privatetotal,        
+      itemId: this.#item.itemId ? this.#item.itemId : Date.now(),
+    }
+    let validresult=validation.isObjValid(confItem);
+    if (validresult){
+      confirmBtn.removeAttribute('disabled');
+    }else{
+      confirmBtn.setAttribute('disabled','disabled');
+    }
   }
 }
-
 export default Popup;

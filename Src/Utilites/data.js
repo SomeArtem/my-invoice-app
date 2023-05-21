@@ -46,7 +46,7 @@ class State2 {
     }
     getData() {
         let rawdataObject = localStorage.getItem(this.#LocalStorageKey);
-        this.#DataObject = rawdataObject ? JSON.parse(rawdataObject) : { id: null, items: [], discount: null };
+        this.#DataObject = rawdataObject ? JSON.parse(rawdataObject) : { id: null, items: [], discount: null, taxes: null };
         return this.#DataObject.items;
     }
     addItem(item) {
@@ -78,6 +78,15 @@ class State2 {
     getDiscount() {
         console.log('getDiscount вернул ', this.#DataObject.discount);
         return this.#DataObject.discount;
+    }
+    setTaxes(val) {
+        this.#DataObject.taxes = val;
+        let ddddattta = JSON.stringify(this.#DataObject);
+        localStorage.setItem(this.#LocalStorageKey, ddddattta);
+    }
+    getTaxes() {
+        console.log('getTaxes вернул ', this.#DataObject.taxes);
+        return this.#DataObject.taxes;
     }
 }
 

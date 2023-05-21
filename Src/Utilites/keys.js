@@ -27,6 +27,7 @@ const DOM={
         TOTAL_CALCULATIONS:"total-calcucations",
         SUBTOTAL:"subtotal",
         DISCOUNT:"discount",
+        TAXES:"taxes",
         TOTALMAXIMA:"totalmaxima",
     }
 }
