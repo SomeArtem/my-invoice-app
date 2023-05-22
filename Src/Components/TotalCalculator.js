@@ -27,26 +27,38 @@ export default class TotalCalculator {
         const TotalOutput = totalCalcElem.querySelector(`[data-id="${DOM.others.TOTALMAXIMA}"]`);
 
 
-        let items = this.#state.getData() ? this.#state.getData() : [];//!!!!!!!!!!!!!
-        let sum = 0;
-        if (items.length > 0) {
-            items.forEach(item => sum += item.total)
-            SubtotalOutput.innerHTML = sum;
-            TotalOutput.innerHTML = (sum * (1 - this.#state.getDiscount() / 100))*(1+this.#state.getTaxes()/100); //sum * (1 - this.#discount / 100);
-        }
+
+
+        let subtotalCalculate =()=>{
+            let items = this.#state.getData() ? this.#state.getData() : [];
+            let sum = 0;
+            if (items.length > 0) {
+                items.forEach(item => sum += item.total);
+            }
+            return sum;
+        }        
+
+        let subtotalVal=subtotalCalculate();
+        SubtotalOutput.innerHTML = subtotalVal;
+        TotalOutput.innerHTML = (subtotalVal * (1 - this.#state.getDiscount() / 100))*(1+this.#state.getTaxes()/100); //sum * (1 - this.#discount / 100);
 
         DiscountInput.value = this.#state.getDiscount();
         TaxesInput.value = this.#state.getTaxes();
 
 
         DiscountInput.onkeyup = (e) => {
-            this.#state.setDiscount(e.target.value);
-            TotalOutput.innerHTML = (sum * (1 - this.#state.getDiscount() / 100))*(1+this.#state.getTaxes()/100);
+            let newValue=e.target.value;
+            this.#state.setDiscount(newValue);
+            let currentTaxes=this.#state.getTaxes()?this.#state.getTaxes():0;
+            console.log('currentTaxes', currentTaxes);
+            TotalOutput.innerHTML = (subtotalCalculate() * (1 - newValue / 100))*(1+currentTaxes/100);
         }
 
-        TaxesInput.onkeyup = (e) => {            
-            this.#state.setTaxes(e.target.value);
-            TotalOutput.innerHTML = (sum * (1 - this.#state.getDiscount() / 100))*(1+this.#state.getTaxes()/100);
+        TaxesInput.onkeyup = (e) => {
+            let newValue=e.target.value;
+            this.#state.setTaxes(newValue);
+            let currentDiscount=this.#state.getDiscount()?this.#state.getDiscount():0;
+            TotalOutput.innerHTML = (subtotalCalculate() * (1 - currentDiscount / 100))*(1+newValue/100);
         }
 
         ElemToInsert.appendChild(totalCalcElem);
@@ -59,7 +71,10 @@ export default class TotalCalculator {
         let sum = 0;
         items.forEach(item => sum += item.total);
 
+        let currentDiscount=this.#state.getDiscount()?this.#state.getDiscount():0;
+        let currentTaxes=this.#state.getTaxes()?this.#state.getTaxes():0;
+
         SubtotalOutput.innerHTML = sum;
-        TotalOutput.innerHTML = (sum * (1 - this.#state.getDiscount() / 100))*(1+this.#state.getTaxes()/100);
+        TotalOutput.innerHTML = (sum * (1 - currentDiscount / 100))*(1+currentTaxes/100);
     }
 }

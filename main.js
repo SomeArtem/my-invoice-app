@@ -5,10 +5,18 @@ import Popup from './Src/Components/Popup';
 import TableItem from './Src/Components/TableItem';
 import State2 from './Src/Utilites/data';//!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import TotalCalculator from './Src/Components/TotalCalculator';
+import Idinput from './Src/Components/Idinput';
 
 const createBtn = document.querySelector(`[data-id='${DOM.others.CREATE_BUTTON}'`);
 const table = document.querySelector(`[data-id='${DOM.others.TABLE}'`);
 const app = document.querySelector(`[data-id='${DOM.others.APP}']`);
+
+
+// const invoiceIdInput = document.querySelector(`[data-id='${DOM.others.INVOICEIDINP}'`);
+
+
+let idinput=new Idinput();
+idinput.render(app);
 
 let calculator = new TotalCalculator(discountChangedCall);
 calculator.render(app);
