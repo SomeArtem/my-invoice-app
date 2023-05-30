@@ -20,6 +20,7 @@ export default class TotalCalculator {
         `;
         const totalCalcElem = document.createElement('div');
         totalCalcElem.innerHTML = itemMarkup;
+        totalCalcElem.classList.add('total__calcucations_wrap')
 
         const SubtotalOutput = totalCalcElem.querySelector(`[data-id="${DOM.others.SUBTOTAL}"]`);
         const DiscountInput = totalCalcElem.querySelector(`[data-id="${DOM.others.DISCOUNT}"]`);

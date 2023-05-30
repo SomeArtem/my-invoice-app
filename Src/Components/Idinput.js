@@ -7,10 +7,11 @@ export default class Idinput {
     }
     render(ElemToInsert) {
         const itemMarkup = `        
-        Номер платёжки: <input type="text" name="${DOM.others.INVOICEIDINP}" data-id="${DOM.others.INVOICEIDINP}">
+        <input type="text" name="${DOM.others.INVOICEIDINP}" data-id="${DOM.others.INVOICEIDINP}">
         `;
-        const IdInpContainer = document.createElement('div');
+        const IdInpContainer = document.createElement('span');
         IdInpContainer.innerHTML = itemMarkup;
+        IdInpContainer.classList.add('id__input');
 
         const SubtotalOutput = IdInpContainer.querySelector(`[data-id="${DOM.others.INVOICEIDINP}"]`);
 

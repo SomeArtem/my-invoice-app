@@ -29,7 +29,8 @@ const DOM={
         DISCOUNT:"discount",
         TAXES:"taxes",
         TOTALMAXIMA:"totalmaxima",
-        INVOICEIDINP:"invoice-id"
+        INVOICEIDINP:"invoice-id",
+        INVOICENUMTARGET:"invoice-number",
     }
 }
 

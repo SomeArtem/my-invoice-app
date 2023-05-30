@@ -8,12 +8,50 @@
   </head>
   <body>
     <div data-id="app" class="app">
-      <button data-id="create-button" data-info="создать" class="crud__button">(create)</button>
+      <div style="display: flex; flex-direction: row;">
+        <div style="flex-basis: 50%;">
+          <h1 data-id="invoice-number" class="invoice__number">
+            <span>№</span>
+          </h1> 
+        </div>
+        <div style="flex-basis: 50%;">
+          <h1>Invoice</h1>
+          
+          <div style="display: flex; flex-direction: row; margin-top: 3rem;">
+            <div style="flex-basis: 50%;">
+              <h4>Issued</h4>
+              01 Sep, 2022
+            </div>
+            <div style="flex-basis: 50%;">
+              <h4>Due</h4>
+              15 Sep, 2022
+            </div>
+          </div>
+          
+          <div style="display: flex; flex-direction: row; margin-top: 3rem;">
+            <div style="flex-basis: 50%;">
+              <h4>From</h4>
+              Name or Company
+              123 Godly Street
+              Internet, 198233
+              Saint-Petersburg, Russia
+            </div>
+            <div style="flex-basis: 50%;">
+              <h4>To</h4>
+              Payer Company
+              Unknown Street, 832/6
+              Extranet TF, 99321
+              Another City, Country
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <!-- <div>Номер платёжки: <input type="text" name="invoice-id" data-id="invoice-id"> </div> -->
 
 
 
-      <div class="table__item" style="background-color: rgb(45, 85, 85);">
+      <div class="table__item" style="background-color: rgb(45, 85, 85); margin-top: 4rem;">
         <div>title:</div>
         <div>description:</div>
         <div>quantity:</div>
@@ -22,6 +60,9 @@
       </div>
       <div data-id="table" style="position: relative;">
       </div>
+
+
+      <button data-id="create-button" data-info="создать" class="crud__button">(create)</button>
       <!-- <div data-id="total-calcucations" class="total__calcucations" style="background-color: crimson;">
         <div>Предрасчёт: <span data-id="subtotal"></span> </div>
         <div>Скидка: <input type="text" name="discount" data-id="discount"> </div>

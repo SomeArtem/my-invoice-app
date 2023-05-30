@@ -9,6 +9,7 @@ import Idinput from './Src/Components/Idinput';
 
 const createBtn = document.querySelector(`[data-id='${DOM.others.CREATE_BUTTON}'`);
 const table = document.querySelector(`[data-id='${DOM.others.TABLE}'`);
+const invoiceNumber = document.querySelector(`[data-id='${DOM.others.INVOICENUMTARGET}'`);
 const app = document.querySelector(`[data-id='${DOM.others.APP}']`);
 
 
@@ -16,7 +17,7 @@ const app = document.querySelector(`[data-id='${DOM.others.APP}']`);
 
 
 let idinput=new Idinput();
-idinput.render(app);
+idinput.render(invoiceNumber);
 
 let calculator = new TotalCalculator(discountChangedCall);
 calculator.render(app);

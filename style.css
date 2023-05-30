@@ -1,24 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
+:root {
+  --grey-text: rgb(148,163,184);
+  --black-text: rgb(0, 0, 0);
+  --white-text: rgb(255, 255, 255);
+
+  --dark-background:rgb(48, 48, 48);
+  --white-background:rgb(255, 255, 255);
+  --app-background:#33d84c;
+  --hover-gray: rgba(148, 163, 184, 0.24)
+}
+
+
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
+}
+
+html{
+  font-size: 16px;  
+  font-family: 'Inter', sans-serif;
+  background-color: var(--dark-background);
+  color: var(--black-text);
+  font-weight: 400;
 }
 
 body{
-  background-color: rgb(48, 48, 48);
-  color: white;
+  
+}
+
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+h1,h2,h3,h4,h5{
+  font-weight: 700;
+}
+h1{
+  font-size: 2.75rem;
 }
 
 .app{
   /* width: 1500px; */
+  position: relative;
   max-width: 80%;
   margin: 0 auto;
   padding: 2rem;
+  background-color: var(--white-background);
 }
 
 .popup{
-  /* position: absolute; */
+  position: absolute;
   top: 0;
+  left: 0;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -42,6 +89,18 @@ body{
   align-items: center;
 }
 
+.id__input *{
+  width: 8rem;
+  background-color: transparent;
+
+  border-bottom: 2px solid var(--grey-text);
+}
+
+.invoice__number{
+  font-weight: 400;
+  color: var(--grey-text);
+}
+
 .crud__button{
   background-color: #2b913a;
   display: inline-block;
@@ -59,6 +118,18 @@ body{
     width: 100%;
     z-index: 10;
 }
+.total__calcucations_wrap{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.total__calcucations{
+  width: 50%;
+}
+.total__calcucations input{
+  border-bottom: 2px solid var(--grey-text);
+  background-color: transparent;
+}
 .table__item{
   display: flex;
   flex-direction: row;
@@ -67,7 +138,7 @@ body{
   cursor: pointer;
 }
 .table__item:hover{
-  background-color: blueviolet;
+  background-color: var(--hover-gray);
 }
 
 @media (prefers-color-scheme: light) {

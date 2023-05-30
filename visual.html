@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>    
+    <div data-id="app" class="app">
+        <button data-id="create-button" data-info="создать" class="crud__button">(create)</button>
+        <div class="table__item" style="background-color: rgb(45, 85, 85);">
+            <div>title:</div>
+            <div>description:</div>
+            <div>quantity:</div>
+            <div>cost:</div>
+            <div>total:</div>
+        </div>
+        <div data-id="table" style="position: relative;">
+            <div class="table__item">
+                <div>31r31</div>
+                <div>2rsdaf</div>
+                <div>10</div>
+                <div>20</div>
+                <div>200</div>
+                <div style="display:none">1684781220835</div>
+            </div>
+            <div class="table__item">
+                <div>ljkbkjkj</div>
+                <div> lgkjhgkjhg </div>
+                <div>2</div>
+                <div>10</div>
+                <div>20</div>
+                <div style="display:none">1685461828618</div>
+            </div>
+            <div class="table__item">
+                <div>lkjblkjb</div>
+                <div> kljnjkn</div>
+                <div>5</div>
+                <div>10</div>
+                <div>50</div>
+                <div style="display:none">1685461855484</div>
+            </div>
+        </div>
+        <div>        
+            Номер платёжки: <input type="text" name="invoice-id" data-id="invoice-id">
+        </div>
+        <div>
+            <div data-id="total-calcucations" class="total__calcucations" style="background-color: crimson;">
+                <div>Предрасчёт: <span data-id="subtotal">270</span> </div>
+                <div>Скидка: <input type="text" name="discount" data-id="discount"></div>
+                <div>Налоги: <input type="text" name="taxes" data-id="taxes"></div>
+                <div>Финально: <span data-id="totalmaxima">288.09</span> </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script type="module" src="/main.js"></script> -->
+</body>
+</html>
