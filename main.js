@@ -10,6 +10,7 @@ import Idinput from './Src/Components/Idinput';
 const createBtn = document.querySelector(`[data-id='${DOM.others.CREATE_BUTTON}'`);
 const table = document.querySelector(`[data-id='${DOM.others.TABLE}'`);
 const invoiceNumber = document.querySelector(`[data-id='${DOM.others.INVOICENUMTARGET}'`);
+const TotalsSection = document.querySelector(`[data-id='${DOM.others.TOTALSSECTION}'`);
 const app = document.querySelector(`[data-id='${DOM.others.APP}']`);
 
 
@@ -20,7 +21,7 @@ let idinput=new Idinput();
 idinput.render(invoiceNumber);
 
 let calculator = new TotalCalculator(discountChangedCall);
-calculator.render(app);
+calculator.render(TotalsSection);
 
 const state = new State2('TableItems');//!!!!!!!!!!!!!!!!!!!!!!!!!!!
 let localdata = state.getData();//массив
@@ -84,8 +85,9 @@ function confirmPopupCallback(item) {
   closePopupCallback();
   renderData(puk);
 
-
   calculator.refreshTotals();
+  calculator.refreshDiscounts();
+  calculator.refreshTaxes();
 }
 
 function editPopupCallback(item) {
@@ -98,6 +100,8 @@ function editPopupCallback(item) {
 
 
   calculator.refreshTotals();
+  calculator.refreshDiscounts();
+  calculator.refreshTaxes();
 }
 
 //обрабатывает клик по кнопке удаления попапа
@@ -108,6 +112,8 @@ function deletePopupCallback(id) {
   renderData(puk);
 
   calculator.refreshTotals();
+  calculator.refreshDiscounts();
+  calculator.refreshTaxes();
 }
 
 //отображает переданный массив в виде элементов TableItem

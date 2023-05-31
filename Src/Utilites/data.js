@@ -7,6 +7,7 @@ class State2 {
     getData() {
         let rawdataObject = localStorage.getItem(this.#LocalStorageKey);
         this.#DataObject = rawdataObject ? JSON.parse(rawdataObject) : { items: [], discount: null, taxes: null, invoiceid: null};
+        // console.log('State2 getData rawdataObject',rawdataObject);
         return this.#DataObject.items;
     }
     addItem(item) {

@@ -27,10 +27,13 @@ const DOM={
         TOTAL_CALCULATIONS:"total-calcucations",
         SUBTOTAL:"subtotal",
         DISCOUNT:"discount",
+        DISCOUNTDISP:"discount-display",
         TAXES:"taxes",
+        TAXESDISP:"taxes-display",
         TOTALMAXIMA:"totalmaxima",
         INVOICEIDINP:"invoice-id",
         INVOICENUMTARGET:"invoice-number",
+        TOTALSSECTION:"totals-section",
     }
 }
 

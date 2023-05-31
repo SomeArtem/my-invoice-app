@@ -24,29 +24,29 @@ class Popup {
     const template = `    
       <div class="popup_controls">
         <button ${this.#item.itemId ? '' : 'disabled'} data-id="${DOM.popup.controls.DELETE_BUTTON}">Delete</button>
-        <button data-id="${DOM.popup.controls.CLOSE_BUTTON}">close</button>
+        <button data-id="${DOM.popup.controls.CLOSE_BUTTON}">Закрыть</button>
       </div>
       <div class="popup_inputs">
         <h1>${this.#callName}</h1>
         <!--<input data-id="invoice-num-input" type="text" name="">-->
         <div>
-          <span>Qty:</span>
+          <span>Количество:</span>
           <input data-id="${DOM.popup.inputs.QUANTITY_INPUT}" type="text" name="" id="" value="${this.#item.quantity ? this.#item.quantity : ''}">
         </div>
         <div>
-          <span>Cost: $</span>
+          <span>Стоимость: $</span>
           <input data-id="${DOM.popup.inputs.COST_INPUT}" type="text" name="" id="" value="${this.#item.cost ? this.#item.cost : ''}">
         </div>
-        <div>Total: <span data-id="total-display">${this.#item.total ? this.#item.total : '0'}$</span></div>
+        <div>Суммарно: <span data-id="total-display">${this.#item.total ? this.#item.total : '0'}$</span></div>
         <button data-id="${DOM.popup.controls.CONFIRM_BUTTON}" disabled>${this.#callName} ${this.#item.itemId ? this.#item.itemId : ''}</button>
       </div>
       <div>
         <div style="display: flex; flex-direction: column;">
-          Work item:
+          Наименование работ:
           <input data-id="${DOM.popup.inputs.TITLE_INPUT}" type="text" name="" id="" placeholder="Enter title of the work item" value="${this.#item.title ? this.#item.title : ''}">
         </div>
         <div style="display: flex; flex-direction: column;">
-          Description:
+          Описание:
           <textarea data-id="${DOM.popup.inputs.DESCRIPTION_INPUT}" name="" id="" cols="30" rows="10" placeholder="Write what this work item about"> ${this.#item.description ? this.#item.description : ''}</textarea>
         </div>
       </div>
