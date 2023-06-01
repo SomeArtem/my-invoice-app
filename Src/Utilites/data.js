@@ -5,12 +5,26 @@ class State2 {
         this.#LocalStorageKey = LocalStorageKey;
     }
     getData() {
+        // let rawdataObject = localStorage.getItem(this.#LocalStorageKey);
+        // this.#DataObject = rawdataObject ? JSON.parse(rawdataObject) : { items: [], discount: null, taxes: null, invoiceid: null};
+        // return this.#DataObject.items;
+
+        //Это первое обращение? тогда
         let rawdataObject = localStorage.getItem(this.#LocalStorageKey);
-        this.#DataObject = rawdataObject ? JSON.parse(rawdataObject) : { items: [], discount: null, taxes: null, invoiceid: null};
-        // console.log('State2 getData rawdataObject',rawdataObject);
-        return this.#DataObject.items;
+
+        if(rawdataObject){
+            this.#DataObject = JSON.parse(rawdataObject);
+            console.log('getData ВЫПОЛНИЛСЯ THEN');            
+        } else{
+            this.#DataObject = { items: [], discount: null, taxes: null, invoiceid: null};
+            let ddddattta = JSON.stringify(this.#DataObject);
+            localStorage.setItem(this.#LocalStorageKey, ddddattta);
+            console.log('getData ВЫПОЛНИЛСЯ ELSE');
+        }
+        return this.#DataObject.items;        
     }
     addItem(item) {
+        this.#DataObject = JSON.parse(localStorage.getItem(this.#LocalStorageKey));//asfasffasfasf
         this.#DataObject.items.push(item);
         let ddddattta = JSON.stringify(this.#DataObject);
         localStorage.setItem(this.#LocalStorageKey, ddddattta);
@@ -36,6 +50,7 @@ class State2 {
         this.#DataObject.discount = val;
         let ddddattta = JSON.stringify(this.#DataObject);
         localStorage.setItem(this.#LocalStorageKey, ddddattta);
+        console.log('setDiscount отработал',this.#DataObject.discount);
     }
     getDiscount() {
         console.log('getDiscount вернул ', this.#DataObject.discount);
@@ -45,7 +60,7 @@ class State2 {
         this.#DataObject.taxes = val;
         let ddddattta = JSON.stringify(this.#DataObject);
         localStorage.setItem(this.#LocalStorageKey, ddddattta);
-        console.log('setTaxes отработал',this.#DataObject);
+        console.log('setTaxes отработал',this.#DataObject.taxes);
     }
     getTaxes() {
         console.log('getTaxes вернул ', this.#DataObject.taxes);

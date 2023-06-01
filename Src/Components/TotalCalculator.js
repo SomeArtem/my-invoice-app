@@ -1,5 +1,6 @@
 import State2 from "../Utilites/data";//!!!!!!!!!!!!!!!!!
 import DOM from "../Utilites/keys";
+import validation from "../Utilites/validation";
 
 export default class TotalCalculator {
     #state = new State2('TableItems');
@@ -44,22 +45,26 @@ export default class TotalCalculator {
         TaxesOutput.innerHTML=(subtotalVal-discountvalue)*taxesfromstate*0.01;//ТУУУУУУУТ
 
 
-        DiscountInput.onkeyup = (e) => {
+        DiscountInput.oninput = (e) => {
             let newValue=e.target.value;
-            this.#state.setDiscount(newValue);
+            let validNum=validation.isNum(newValue);
+            e.target.value=validNum;
+            this.#state.setDiscount(validNum);
             let currentTaxes=this.#state.getTaxes()?this.#state.getTaxes():0;
             console.log('currentTaxes', currentTaxes);
-            TotalOutput.innerHTML = (this.subtotalCalculate2() * (1 - newValue / 100))*(1+currentTaxes/100);
+            TotalOutput.innerHTML = (this.subtotalCalculate2() * (1 - validNum / 100))*(1+currentTaxes/100);
 
             this.refreshDiscounts();
             this.refreshTaxes();
         }
 
-        TaxesInput.onkeyup = (e) => {
+        TaxesInput.oninput = (e) => {
             let newValue=e.target.value;
-            this.#state.setTaxes(newValue);
+            let validNum=validation.isNum(newValue);
+            e.target.value=validNum;
+            this.#state.setTaxes(validNum);
             let currentDiscount=this.#state.getDiscount()?this.#state.getDiscount():0;
-            TotalOutput.innerHTML = (this.subtotalCalculate2() * (1 - currentDiscount / 100))*(1+newValue/100);
+            TotalOutput.innerHTML = (this.subtotalCalculate2() * (1 - currentDiscount / 100))*(1+validNum/100);
 
             this.refreshTaxes();
             this.refreshDiscounts();
