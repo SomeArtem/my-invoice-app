@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700;900&display=swap');
+
 
 
 :root {
@@ -6,7 +8,7 @@
   --black-text: rgb(0, 0, 0);
   --white-text: rgb(255, 255, 255);
 
-  --dark-background:rgb(48, 48, 48);
+  --dark-background:rgb(229,231,235);
   --white-background:rgb(255, 255, 255);
   --app-background:#33d84c;
   --hover-gray: rgba(148, 163, 184, 0.24)
@@ -23,7 +25,8 @@
 
 html{
   font-size: 16px;  
-  font-family: 'Inter', sans-serif;
+  /* font-family: 'Inter', sans-serif; */
+  font-family: 'Roboto', sans-serif;
   background-color: var(--dark-background);
   color: var(--black-text);
   font-weight: 400;
@@ -46,7 +49,7 @@ button, input, optgroup, select, textarea {
 }
 
 h1,h2,h3,h4,h5{
-  font-weight: 700;
+  font-weight: 500;
 }
 h1{
   font-size: 2.75rem;
@@ -57,7 +60,7 @@ h1{
   position: relative;
   max-width: 80%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem;
   background-color: var(--white-background);
 }
 
@@ -107,14 +110,19 @@ h1{
 }
 
 .crud__button{
-  background-color: #2b913a;
+  background-color: rgb(226,232,240);
+  margin-top: 48px;
   display: inline-block;
-  padding: 10px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   cursor: pointer;
+
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 .crud__button:hover{
-  background-color: #33d84c;
+  background-color: rgb(209,213,219);
 }
 .sdhsdhseh{
     position: absolute;
@@ -130,6 +138,10 @@ h1{
 }
 .total__calcucations{
   width: 50%;
+  padding-top: 8px;
+  border-top-width: 2px; 
+  border-top-style: solid; 
+  border-color: rgb(75,85,99);  
 }
 .total__calcucations input{
   border-bottom: 2px solid var(--grey-text);
@@ -140,8 +152,39 @@ h1{
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  padding: 8px 0;
   cursor: pointer;
+  border-bottom: 1px solid rgb(209,213,219);
+  align-items: center;
 }
+
+.dollar{
+  color: rgb(209,213,219);
+}
+
+.table__credentials{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 3px;
+}
+.table__title{
+  font-weight: 700;
+}
+.table__description{
+  font-size: 0.75rem;
+  color: rgb(156,163,175);
+}
+.table__qty{
+  width: 12.5%;
+  text-align: start;
+}
+.table__total{
+  width: 25%;
+  text-align: end;
+  padding-right: 3px;
+}
+
 .table__item:hover{
   background-color: var(--hover-gray);
 }

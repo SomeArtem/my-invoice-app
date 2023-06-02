@@ -13,10 +13,31 @@ export default class TotalCalculator {
 
         const itemMarkup = `
         <div data-id="${DOM.others.TOTAL_CALCULATIONS}" class="total__calcucations">
-            <div>Предрасчёт: <span data-id="${DOM.others.SUBTOTAL}"></span> </div>
-            <div>Скидка: <input type="text" name="${DOM.others.DISCOUNT}" data-id="${DOM.others.DISCOUNT}"> <span data-id="${DOM.others.DISCOUNTDISP}">-</span></div>
-            <div>Налоги: <input type="text" name="${DOM.others.TAXES}" data-id="${DOM.others.TAXES}"> <span data-id="${DOM.others.TAXESDISP}">-</span></div>
-            <div>Финально: <span data-id="${DOM.others.TOTALMAXIMA}"></span> </div>
+            <div style="display:flex; flex-direction:row; justify-content:space-between; line-height:2rem">
+                <span>Subtotal</span>
+                <span data-id="${DOM.others.SUBTOTAL}"></span> 
+            </div>
+            <div style="display:flex; flex-direction:row; justify-content:space-between; line-height:2rem">
+                <span> 
+                    <label for="${DOM.others.DISCOUNT}">Discount</label> 
+                    (<input style="width: 1.5rem; color: rgb(148,163,184);line-height: 1rem; padding-left: 0.2rem;" type="text" name="${DOM.others.DISCOUNT}" data-id="${DOM.others.DISCOUNT}">%)
+                </span> 
+                <span data-id="${DOM.others.DISCOUNTDISP}">-</span>
+            </div>
+            <div style="display:flex; flex-direction:row; justify-content:space-between; line-height:2rem">
+                <span>
+                    <label for="${DOM.others.TAXES}">Taxes</label>
+                    (<input style="width: 1.5rem; color: rgb(148,163,184);line-height: 1rem; padding-left: 0.2rem;" type="text" name="${DOM.others.TAXES}" data-id="${DOM.others.TAXES}">%)
+                </span>
+                <span data-id="${DOM.others.TAXESDISP}">-</span>
+            </div>
+            <div style="margin-top:64px; padding-top: 0.5rem; display:flex; flex-direction:row; justify-content:space-between; line-height:2rem; border-top-width: 2px; border-top-style: solid; border-color: rgb(75,85,99);">
+                <span style="font-weight:700;">Total</span>
+                <span>
+                    <span data-id="${DOM.others.TOTALMAXIMA}"></span>
+                    <span class="dollar">$</span>
+                </span>
+            </div>
         </div>
         `;
         const totalCalcElem = document.createElement('div');

@@ -17,7 +17,7 @@
         <div style="flex-basis: 50%;">
           <h1>Invoice</h1>
           
-          <div style="display: flex; flex-direction: row; margin-top: 3rem;">
+          <div style="display: flex; flex-direction: row; margin-top: 3rem; line-height: 1.5rem;">
             <div style="flex-basis: 50%;">
               <h4>Issued</h4>
               01 Sep, 2022
@@ -28,20 +28,20 @@
             </div>
           </div>
           
-          <div style="display: flex; flex-direction: row; margin-top: 3rem;">
+          <div style="display: flex; flex-direction: row; margin-top: 3rem; line-height: 1.5rem;">
             <div style="flex-basis: 50%;">
               <h4>From</h4>
-              Name or Company
-              123 Godly Street
-              Internet, 198233
-              Saint-Petersburg, Russia
+              Name or Company <br>
+              123 Godly Street <br>
+              Internet, 198233 <br>
+              Saint-Petersburg, Russia <br>
             </div>
             <div style="flex-basis: 50%;">
               <h4>To</h4>
-              Payer Company
-              Unknown Street, 832/6
-              Extranet TF, 99321
-              Another City, Country
+              Payer Company<br>
+              Unknown Street, 832/6<br>
+              Extranet TF, 99321<br>
+              Another City, Country<br>
             </div>
           </div>
         </div>
@@ -51,40 +51,44 @@
 
 
 
-      <div class="table__item" style="background-color: transparent; margin-top: 4rem;">
-        <div>Название:</div>
-        <div>Описание:</div>
-        <div>Количество:</div>
-        <div>Стоимость:</div>
-        <div>Суммарно:</div>
+      <div class="table__item" style="margin-top: 4rem; font-weight: 700; color: rgb(107,114,128); font-size: 0.875rem; line-height: 1.25rem; border-bottom-width: 2px; border-bottom-style: solid; border-color: rgb(75,85,99);">
+        <div class="table__credentials">
+          <div class="table__title"><p>Item:</p></div>
+        </div>
+        <div class="table__qty"><p>Qty</p></div>
+        <div class="table__qty"><p>Cost <span class="dollar">($)</span></p></div>
+        <div class="table__total"><p>Total <span class="dollar">($)</span></p></div>
       </div>
       <div data-id="table" style="position: relative;">
       </div>
 
 
-      <button data-id="create-button" data-info="создать" class="crud__button">(Создать)</button>
+      <button data-id="create-button" data-info="создать" class="crud__button">+</button>
       <!-- <div data-id="total-calcucations" class="total__calcucations" style="background-color: crimson;">
         <div>Предрасчёт: <span data-id="subtotal"></span> </div>
         <div>Скидка: <input type="text" name="discount" data-id="discount"> </div>
         <div>Финально: <span data-id="totalmaxima"></span> </div>
       </div> -->
 
-      <section data-id="totals-section">
+      <section data-id="totals-section" style="margin-top: 64px;">
         <!-- place to render totals -->
       </section>
 
 
-      <footer style="display: flex; flex-direction: row; justify-content: end;">
+      <footer style="display: flex; flex-direction: row; justify-content: end; margin-top: 9rem;">
         <div style="flex-basis: 50%;">
           <div style="display: flex; flex-direction: row; justify-content: space-between;">
             <b>IBAN</b>
             <span data-id="iban"></span>
           </div>
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          Thank you,
-          Your name
+          <p style="margin-top: 16px; font-size: 0.875rem; line-height: 1.25rem; color: rgb(107,114,128);">
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><br>
+            Thank you,<br>
+            Your name <br>
+          
         </div>
       </footer>
+      
 
 
 
