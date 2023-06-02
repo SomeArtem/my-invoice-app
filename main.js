@@ -6,12 +6,14 @@ import TableItem from './Src/Components/TableItem';
 import State2 from './Src/Utilites/data';//!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import TotalCalculator from './Src/Components/TotalCalculator';
 import Idinput from './Src/Components/Idinput';
+import Iban from './Src/Components/Iban';
 
 const createBtn = document.querySelector(`[data-id='${DOM.others.CREATE_BUTTON}'`);
 const table = document.querySelector(`[data-id='${DOM.others.TABLE}'`);
 const invoiceNumber = document.querySelector(`[data-id='${DOM.others.INVOICENUMTARGET}'`);
 const TotalsSection = document.querySelector(`[data-id='${DOM.others.TOTALSSECTION}'`);
 const app = document.querySelector(`[data-id='${DOM.others.APP}']`);
+const ibanPlace = document.querySelector(`[data-id='${DOM.others.IBAN}']`);
 
 
 // const invoiceIdInput = document.querySelector(`[data-id='${DOM.others.INVOICEIDINP}'`);
@@ -22,6 +24,9 @@ idinput.render(invoiceNumber);
 
 let calculator = new TotalCalculator(discountChangedCall);
 calculator.render(TotalsSection);
+
+let iban=new Iban();
+iban.render(ibanPlace);
 
 const state = new State2('TableItems');//!!!!!!!!!!!!!!!!!!!!!!!!!!!
 let localdata = state.getData();//массив
@@ -73,8 +78,8 @@ function renderPopup(callerName, itemToChange) {
 //закрывает попап (изымает последний элемент из app, исправить, удалять слушатели)
 function closePopupCallback() {
   app.lastChild.remove();
-  createBtn.removeAttribute('disabled');
-  table.removeChild(table.children[0]);
+  createBtn.removeAttribute('disabled');//kinda showControls
+  table.removeChild(table.children[0]);//kinda showControls
 
 }
 

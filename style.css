@@ -96,6 +96,11 @@ h1{
   border-bottom: 2px solid var(--grey-text);
 }
 
+.iban__input{
+  width: 20rem;
+  border-bottom: 2px solid var(--grey-text);
+}
+
 .invoice__number{
   font-weight: 400;
   color: var(--grey-text);

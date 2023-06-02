@@ -36,24 +36,26 @@ export default class TotalCalculator {
         let taxesfromstate=this.#state.getTaxes();
 
         SubtotalOutput.innerHTML = subtotalVal;
-        TotalOutput.innerHTML = (subtotalVal * (1 - discountfromstate / 100))*(1+taxesfromstate/100); //sum * (1 - this.#discount / 100);
+        TotalOutput.innerHTML = Number((subtotalVal * (1 - discountfromstate / 100))*(1+taxesfromstate/100)).toFixed(2); //sum * (1 - this.#discount / 100);
 
         DiscountInput.value = discountfromstate;
         TaxesInput.value = taxesfromstate;
         let discountvalue=this.DiscountsCalculate();
-        DiscountOutput.innerHTML=discountvalue;//ТУУУУУУУТ        
-        TaxesOutput.innerHTML=(subtotalVal-discountvalue)*taxesfromstate*0.01;//ТУУУУУУУТ
+        DiscountOutput.innerHTML=Number( discountvalue).toFixed(2);//ТУУУУУУУТ        
+        TaxesOutput.innerHTML=Number((subtotalVal-discountvalue)*taxesfromstate*0.01).toFixed(2);//ТУУУУУУУТ
 
 
         DiscountInput.oninput = (e) => {
             let newValue=e.target.value;
             let validNum=validation.isNum(newValue);
+            validNum=validation.maxVal(newValue,99);
             e.target.value=validNum;
             this.#state.setDiscount(validNum);
             let currentTaxes=this.#state.getTaxes()?this.#state.getTaxes():0;
             console.log('currentTaxes', currentTaxes);
-            TotalOutput.innerHTML = (this.subtotalCalculate2() * (1 - validNum / 100))*(1+currentTaxes/100);
+            // TotalOutput.innerHTML = Number((this.subtotalCalculate2() * (1 - validNum / 100))*(1+currentTaxes/100)).toFixed(2);
 
+            this.refreshTotals();
             this.refreshDiscounts();
             this.refreshTaxes();
         }
@@ -64,8 +66,9 @@ export default class TotalCalculator {
             e.target.value=validNum;
             this.#state.setTaxes(validNum);
             let currentDiscount=this.#state.getDiscount()?this.#state.getDiscount():0;
-            TotalOutput.innerHTML = (this.subtotalCalculate2() * (1 - currentDiscount / 100))*(1+validNum/100);
-
+            // TotalOutput.innerHTML = Number((this.subtotalCalculate2() * (1 - currentDiscount / 100))*(1+validNum/100)).toFixed(2);
+            
+            this.refreshTotals();
             this.refreshTaxes();
             this.refreshDiscounts();
         }
@@ -116,18 +119,18 @@ export default class TotalCalculator {
         const TotalOutput = document.querySelector(`[data-id="${DOM.others.TOTALMAXIMA}"]`);
 
         SubtotalOutput.innerHTML = this.subtotalCalculate2();
-        TotalOutput.innerHTML = this.totalCalculate();
+        TotalOutput.innerHTML = Number(this.totalCalculate()).toFixed(2);
     }
 
     refreshDiscounts(){
         const DiscountOutput = document.querySelector(`[data-id="${DOM.others.DISCOUNTDISP }"]`);
-        let discountVal=this.DiscountsCalculate();
+        let discountVal=Number(this.DiscountsCalculate()).toFixed(2);
         DiscountOutput.innerHTML=`${discountVal}`;
     }
 
     refreshTaxes(){
         const TaxesOutput = document.querySelector(`[data-id="${DOM.others.TAXESDISP}"]`);
-        let taxesVal=this.TaxesCalculate();
+        let taxesVal=Number(this.TaxesCalculate()).toFixed(2);
         TaxesOutput.innerHTML=`${taxesVal}`;
     }
 }

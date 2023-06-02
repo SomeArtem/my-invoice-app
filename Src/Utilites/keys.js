@@ -32,6 +32,8 @@ const DOM={
         TAXESDISP:"taxes-display",
         TOTALMAXIMA:"totalmaxima",
         INVOICEIDINP:"invoice-id",
+        IBANINP:"iban-input",
+        IBAN:"iban",
         INVOICENUMTARGET:"invoice-number",
         TOTALSSECTION:"totals-section",
     }

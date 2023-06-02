@@ -21,6 +21,12 @@ export default class validation{
         result = val.length>max ? val.slice(0,val.length-1) : val;
         return result.trim();
     }
+    
+    static maxVal(val,max){
+        let result;
+        result = val>max ? val.slice(0,val.length-1) : val;
+        return result.trim();
+    }
 
     static isObjValid(item){
         console.log('item.title: ',item.title.length);
